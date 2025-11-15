@@ -428,7 +428,7 @@ export default function Cart() {
                 Your cart is empty
               </h2>
               <p className="text-sm sm:text-base text-gray-600 max-w-md">
-                Looks like you haven't added anything to your cart yet. Start
+                Looks like you have not added anything to your cart yet. Start
                 shopping to find amazing products!
               </p>
             </div>
