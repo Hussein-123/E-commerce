@@ -121,6 +121,37 @@
   }
 }
 
+@layer utilities {
+  /* Custom responsive utilities for small screens */
+  .text-responsive {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1rem, 3vw, 1.125rem);
+  }
+
+  .spacing-responsive {
+    padding: clamp(0.5rem, 2.5vw, 1rem);
+  }
+
+  /* Improved touch targets for mobile */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Prevent horizontal scroll on small screens */
+  body {
+    overflow-x: hidden;
+  }
+}
+
 .preloader {
   --hue: 120;
   --bg: hsl(var(--hue), 10%, 90%);

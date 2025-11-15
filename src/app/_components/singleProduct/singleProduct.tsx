@@ -19,39 +19,46 @@ export default function SingleProduct({
   productInfo: productType;
 }) {
   return (
-    <>
-      <div>
-        <Card className="gap-3 p-3">
-          <Link href={`/products/${productInfo.id}`}>
-            <CardHeader className="px-2">
-              <CardTitle>
-                <Image
-                  src={productInfo.imageCover}
-                  alt=""
-                  width={500}
-                  height={500}
-                />
-              </CardTitle>
-              <CardDescription className="text-emerald-500 font-medium">
-                {productInfo.category.name}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="px-2">
-              <p className="line-clamp-1">{productInfo.title}</p>
-            </CardContent>
-            <CardFooter className="px-2">
-              <div className="flex justify-between w-full">
-                <span>{productInfo.price} EGP</span>
-                <div className="flex gap-1 items-center">
-                  <span>{productInfo.ratingsAverage}</span>
-                  <StarIcon className="fill-yellow-500 text-yellow-500" />
-                </div>
+    <div className="w-full">
+      <Card className="h-full flex flex-col gap-2 p-2 sm:p-3 hover:shadow-lg transition-all duration-300 group">
+        <Link href={`/products/${productInfo.id}`} className="flex-1">
+          <CardHeader className="px-1 sm:px-2 pb-2">
+            <CardTitle className="aspect-square overflow-hidden rounded-lg bg-gray-50">
+              <Image
+                src={productInfo.imageCover}
+                alt={productInfo.title}
+                width={400}
+                height={400}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </CardTitle>
+            <CardDescription className="text-emerald-500 font-medium text-xs sm:text-sm mt-2">
+              {productInfo.category.name}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="px-1 sm:px-2 pb-2">
+            <p className="line-clamp-2 text-sm sm:text-base text-gray-700 leading-tight">
+              {productInfo.title}
+            </p>
+          </CardContent>
+          <CardFooter className="px-1 sm:px-2 pb-2 mt-auto">
+            <div className="flex justify-between items-center w-full">
+              <span className="font-semibold text-sm sm:text-base text-gray-800">
+                {productInfo.price} EGP
+              </span>
+              <div className="flex gap-1 items-center">
+                <span className="text-xs sm:text-sm text-gray-600">
+                  {productInfo.ratingsAverage}
+                </span>
+                <StarIcon className="fill-yellow-500 text-yellow-500 w-3 h-3 sm:w-4 sm:h-4" />
               </div>
-            </CardFooter>
-          </Link>
+            </div>
+          </CardFooter>
+        </Link>
+        <div className="px-1 sm:px-2">
           <AddBtn id={productInfo.id} />
-        </Card>
-      </div>
-    </>
+        </div>
+      </Card>
+    </div>
   );
 }

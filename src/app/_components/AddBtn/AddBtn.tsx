@@ -29,16 +29,20 @@ export default function AddBtn({ id }: { id: string }) {
     }
   }
   return (
-    <>
-      <Button onClick={() => addProduct(id)} className="cursor-pointer w-full">
-        {loading ? (
-          <Loader2 className="animate-spin mx-auto" />
-        ) : (
-          <>
-            Add To Cart <ShoppingCart />
-          </>
-        )}
-      </Button>
-    </>
+    <Button
+      onClick={() => addProduct(id)}
+      className="cursor-pointer w-full min-h-9 sm:min-h-10 text-xs sm:text-sm font-medium bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200"
+      disabled={loading}
+    >
+      {loading ? (
+        <Loader2 className="animate-spin mx-auto w-4 h-4" />
+      ) : (
+        <>
+          <span className="hidden sm:inline">Add To Cart</span>
+          <span className="sm:hidden">Add To Cart</span>
+          <ShoppingCart className="w-4 h-4 ml-1 sm:ml-2" />
+        </>
+      )}
+    </Button>
   );
 }

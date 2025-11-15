@@ -36,7 +36,9 @@ export default function RootLayout({
         <MySessionProvider>
           <CartContextProvider>
             <Navbar />
-            <div className="min-h-[60vh] my-20">{children}</div>
+            <main className="min-h-[60vh] mt-16 sm:mt-18 md:mt-20 pt-4 sm:pt-6 px-2 sm:px-4">
+              {children}
+            </main>
             <Toaster position="top-center" richColors duration={2000} />
             <Footer />
           </CartContextProvider>

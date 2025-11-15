@@ -118,7 +118,7 @@ export default function Cart() {
   return (
     <>
       {cartInfo?.data?.products && cartInfo.data.products.length > 0 ? (
-        <div className="container w-[90%] md:w-[80%] mx-auto px-3">
+        <div className="container w-full px-3 sm:px-4 md:w-[90%] lg:w-[80%] mx-auto">
           {/* ==== Desktop Table View ==== */}
           <div className="hidden md:block relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500">
@@ -253,156 +253,191 @@ export default function Cart() {
           </div>
 
           {/* ==== Mobile Responsive Cards ==== */}
-          <div className="md:hidden flex flex-col gap-4 mt-4">
+          <div className="md:hidden flex flex-col gap-3 mt-4">
             {cartInfo.data.products.map((item: CartProductType) => (
               <div
                 key={item._id}
-                className="bg-white p-4 rounded-lg shadow-md flex flex-col sm:flex-row gap-4"
+                className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
               >
-                <div className="flex justify-center">
-                  <Image
-                    src={item.product.imageCover}
-                    width={150}
-                    height={150}
-                    alt={item.product.title}
-                    className="rounded-lg object-cover"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h3 className="font-semibold text-slate-800 text-base">
-                    {item.product.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm mt-1">
-                    Price: {item.price * item.count} EGP
-                  </p>
-                  <p className="text-slate-600 text-sm mt-1">
-                    Qty: {item.count}
-                  </p>
-                  <div className="flex items-center justify-between mt-3">
-                    <button
-                      disabled={updateDisabled}
-                      onClick={() => {
-                        if (item.count > 1) {
-                          updateItemFromCart(
-                            item.product.id,
-                            `${item.count - 1}`,
-                            "-"
-                          );
-                        }
-                      }}
-                      className="cursor-pointer inline-flex items-center justify-center h-7 w-7 text-slate-500 bg-white border border-slate-500 rounded-full hover:bg-gray-100"
-                      type="button"
-                    >
-                      <svg
-                        className="w-3 h-3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 18 2"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M1 1h16"
-                        />
-                      </svg>
-                    </button>
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={item.product.imageCover}
+                      width={80}
+                      height={80}
+                      alt={item.product.title}
+                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover"
+                    />
+                  </div>
 
-                    <div>
-                      {item.product.id === currentItemId ? (
-                        loadingUpdate ? (
-                          <i className="fas fa-spinner fa-spin"></i>
-                        ) : (
-                          <span className="text-slate-700 font-medium">
-                            {item.count}
-                          </span>
-                        )
-                      ) : (
-                        <span className="text-slate-700 font-medium">
-                          {item.count}
-                        </span>
-                      )}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-800 text-sm sm:text-base line-clamp-2 leading-tight">
+                      {item.product.title}
+                    </h3>
+                    <div className="mt-2 space-y-1">
+                      <p className="text-emerald-600 font-medium text-sm">
+                        {item.price * item.count} EGP
+                      </p>
+                      <p className="text-gray-500 text-xs">
+                        {item.price} EGP each
+                      </p>
                     </div>
 
-                    <button
-                      disabled={updateDisabled}
-                      onClick={() => {
-                        updateItemFromCart(
-                          item.product.id,
-                          `${item.count + 1}`,
-                          "+"
-                        );
-                      }}
-                      className="cursor-pointer inline-flex items-center justify-center h-7 w-7 text-slate-500 bg-white border border-slate-500 rounded-full hover:bg-gray-100"
-                      type="button"
-                    >
-                      <svg
-                        className="w-3 h-3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 18 18"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 1v16M1 9h16"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                    <div className="flex items-center justify-between mt-3">
+                      {/* Quantity Controls */}
+                      <div className="flex items-center gap-2">
+                        <button
+                          disabled={updateDisabled || item.count <= 1}
+                          onClick={() => {
+                            if (item.count > 1) {
+                              updateItemFromCart(
+                                item.product.id,
+                                `${item.count - 1}`,
+                                "-"
+                              );
+                            }
+                          }}
+                          className="inline-flex items-center justify-center w-8 h-8 text-gray-500 bg-gray-50 border border-gray-300 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <svg
+                            className="w-3 h-3"
+                            fill="none"
+                            viewBox="0 0 18 2"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M1 1h16"
+                            />
+                          </svg>
+                        </button>
 
-                <div className="mt-3">
-                  <Button
-                    disabled={removeDisabled}
-                    onClick={() => deleteItemFromCart(item.product.id)}
-                    className="w-full bg-red-500 hover:bg-red-600 text-white text-sm py-2 transition disabled:opacity-50 cursor-pointer"
-                  >
-                    Remove
-                  </Button>
+                        <span className="min-w-8 text-center font-medium text-gray-700">
+                          {item.product.id === currentItemId &&
+                          loadingUpdate ? (
+                            <i className="fas fa-spinner fa-spin text-xs"></i>
+                          ) : (
+                            item.count
+                          )}
+                        </span>
+
+                        <button
+                          disabled={updateDisabled}
+                          onClick={() => {
+                            updateItemFromCart(
+                              item.product.id,
+                              `${item.count + 1}`,
+                              "+"
+                            );
+                          }}
+                          className="inline-flex items-center justify-center w-8 h-8 text-gray-500 bg-gray-50 border border-gray-300 rounded-full hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <svg
+                            className="w-3 h-3"
+                            fill="none"
+                            viewBox="0 0 18 18"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 1v16M1 9h16"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      {/* Remove Button */}
+                      <Button
+                        disabled={removeDisabled}
+                        onClick={() => deleteItemFromCart(item.product.id)}
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 disabled:opacity-50"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* ==== Total Section ==== */}
-          <div className="mt-8 bg-slate-50 p-4 rounded-lg shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-slate-700 text-lg">
-              <i className="fa-solid fa-sack-dollar text-emerald-600 text-xl"></i>{" "}
-              Your Total:{" "}
-              <span className="font-semibold">
-                {cartInfo.data.totalCartPrice} EGP
-              </span>
-            </p>
+          <div className="mt-6 sm:mt-8 bg-gradient-to-r from-slate-50 to-gray-50 p-4 sm:p-6 rounded-lg shadow-sm border border-gray-100">
+            <div className="flex flex-col gap-4">
+              <div className="text-center md:text-left">
+                <p className="text-gray-700 text-base sm:text-lg flex items-center justify-center md:justify-start gap-2">
+                  <span>Your Total:</span>
+                  <span className="font-bold text-emerald-600 text-lg sm:text-xl">
+                    {cartInfo.data.totalCartPrice} EGP
+                  </span>
+                </p>
+                <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                  {cartInfo.data.products.length} item
+                  {cartInfo.data.products.length !== 1 ? "s" : ""} in cart
+                </p>
+              </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-              <Button
-                disabled={removeAllItemsDisabled}
-                onClick={() => clearCart()}
-                className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white transition cursor-pointer disabled:opacity-50"
-              >
-                Delete All Items
-              </Button>
-
-              <Link href="">
-                <Button className="w-full sm:w-auto cursor-pointer">
-                  Next Step
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <Button
+                  disabled={removeAllItemsDisabled}
+                  onClick={() => clearCart()}
+                  variant="outline"
+                  className="w-full sm:flex-1 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 disabled:opacity-50 transition-colors"
+                >
+                  Clear Cart
                 </Button>
-              </Link>
+
+                <Link
+                  href={`/checkout/${cartInfo.data._id}`}
+                  className="w-full sm:flex-1"
+                >
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 transition-colors">
+                    Proceed to Checkout
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="container w-[90%] md:w-[80%] lg:w-[60%] mx-auto p-5 bg-slate-100 flex flex-col items-center gap-4 justify-center rounded-lg shadow-sm text-center">
-          <h2 className="md:text-lg font-medium text-slate-700">
-            Oops! Your cart is empty. Start shopping now by clicking below!
-          </h2>
-          <Link href="/">
-            <Button className="cursor-pointer mt-2">Back to Home</Button>
-          </Link>
+        <div className="container w-full px-4 sm:w-[90%] md:w-[80%] lg:w-[60%] mx-auto">
+          <div className="bg-gradient-to-br from-slate-50 to-gray-50 p-6 sm:p-8 md:p-12 flex flex-col items-center gap-4 sm:gap-6 justify-center rounded-xl shadow-sm border border-gray-100 text-center min-h-[40vh]">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded-full flex items-center justify-center mb-2">
+              <svg
+                className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h7M9.5 18h7"
+                />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+                Your cart is empty
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600 max-w-md">
+                Looks like you haven't added anything to your cart yet. Start
+                shopping to find amazing products!
+              </p>
+            </div>
+            <Link href="/" className="mt-2">
+              <Button className="px-6 sm:px-8 py-2.5 sm:py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors">
+                Start Shopping
+              </Button>
+            </Link>
+          </div>
         </div>
       )}
     </>
