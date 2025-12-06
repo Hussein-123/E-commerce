@@ -2,61 +2,54 @@ import React from "react";
 
 export default function loading() {
   return (
-    <>
-      <div className="h-screen flex justify-center items-center">
-        <div className="preloader">
+    <div className="min-h-[60vh] flex flex-col justify-center items-center bg-white">
+      <div className="relative">
+        {/* Animated circles */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-32 h-32 border-4 border-emerald-200 rounded-full animate-ping"></div>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-24 h-24 border-4 border-emerald-400 rounded-full animate-pulse"></div>
+        </div>
+
+        {/* Shopping cart icon */}
+        <div className="relative z-10 w-32 h-32 flex items-center justify-center">
           <svg
-            className="cart"
-            role="img"
-            aria-label="Shopping cart line animation"
-            viewBox="0 0 128 128"
-            width="128px"
-            height="128px"
+            className="w-16 h-16 text-emerald-600 animate-bounce"
+            fill="currentColor"
+            stroke="none"
+            viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g
-              fill="none"
+            <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="8"
-            >
-              <g className="cart__track" stroke="hsla(0,10%,10%,0.1)">
-                <polyline points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80" />
-                <circle cx="43" cy="111" r="13" />
-                <circle cx="102" cy="111" r="13" />
-              </g>
-              <g className="cart__lines" stroke="currentColor">
-                <polyline
-                  className="cart__top"
-                  points="4,4 21,4 26,22 124,22 112,64 35,64 39,80 106,80"
-                  strokeDasharray="338 338"
-                  strokeDashoffset="-338"
-                />
-                <g className="cart__wheel1" transform="rotate(-90,43,111)">
-                  <circle
-                    className="cart__wheel-stroke"
-                    cx="43"
-                    cy="111"
-                    r="13"
-                    strokeDasharray="81.68 81.68"
-                    strokeDashoffset="81.68"
-                  />
-                </g>
-                <g className="cart__wheel2" transform="rotate(90,102,111)">
-                  <circle
-                    className="cart__wheel-stroke"
-                    cx="102"
-                    cy="111"
-                    r="13"
-                    strokeDasharray="81.68 81.68"
-                    strokeDashoffset="81.68"
-                  />
-                </g>
-              </g>
-            </g>
+              strokeWidth={2}
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
           </svg>
         </div>
       </div>
-    </>
+
+      {/* Loading text with gradient */}
+      <div className="mt-8 text-center space-y-4">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent animate-pulse">
+          FreshCart
+        </h2>
+        <div className="flex items-center gap-2 justify-center">
+          <div className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce [animation-delay:0s]"></div>
+          <div className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+          <div className="w-2 h-2 bg-emerald-600 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+        </div>
+        <p className="text-gray-500 text-sm font-medium">
+          Loading your shopping experience
+        </p>
+      </div>
+
+      {/* Progress bar */}
+      <div className="mt-8 w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 animate-[loading_1.5s_ease-in-out_infinite]"></div>
+      </div>
+    </div>
   );
 }

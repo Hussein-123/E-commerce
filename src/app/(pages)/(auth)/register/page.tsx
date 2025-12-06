@@ -178,9 +178,12 @@ export default function Register() {
                 </FormItem>
               )}
             />
-            <Button className="cursor-pointer w-full">
+            <Button
+              className="cursor-pointer w-full min-h-9 sm:min-h-10 text-xs sm:text-sm font-medium bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200"
+              disabled={loading}
+            >
               {loading ? (
-                <Loader2 className="animate-spin mx-auto" />
+                <Loader2 className="animate-spin mx-auto w-4 h-4" />
               ) : (
                 "Register Now"
               )}

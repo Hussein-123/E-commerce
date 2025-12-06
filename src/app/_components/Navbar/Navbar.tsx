@@ -116,7 +116,7 @@ export default function Navbar() {
             <>
               <Link
                 href="/cart"
-                className="relative p-2 hover:bg-slate-200 rounded-full transition-all duration-200"
+                className="relative p-2 rounded-full transition-all duration-200"
               >
                 <ShoppingCart className="cursor-pointer w-5 h-5 xl:w-6 xl:h-6 hover:text-emerald-600 transition-colors" />
                 {numberOfCartItems > 0 && (
@@ -127,7 +127,7 @@ export default function Navbar() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-2 hover:bg-red-50 rounded-full transition-all duration-200 group"
+                className="p-2 rounded-full transition-all duration-200 group"
                 title="Logout"
               >
                 <LogOut className="cursor-pointer w-5 h-5 xl:w-6 xl:h-6 hover:text-red-600 group-hover:scale-110 transition-all duration-200" />

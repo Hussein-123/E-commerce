@@ -388,7 +388,7 @@ export default function Cart() {
                   disabled={removeAllItemsDisabled}
                   onClick={() => clearCart()}
                   variant="outline"
-                  className="w-full sm:flex-1 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 disabled:opacity-50 transition-colors"
+                  className="w-full sm:flex-1 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 disabled:opacity-50 transition-colors cursor-pointer"
                 >
                   Clear Cart
                 </Button>
@@ -397,7 +397,7 @@ export default function Cart() {
                   href={`/checkout/${cartInfo.data._id}`}
                   className="w-full sm:flex-1"
                 >
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 transition-colors">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 transition-colors cursor-pointer">
                     Proceed to Checkout
                   </Button>
                 </Link>
