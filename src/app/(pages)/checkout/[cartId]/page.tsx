@@ -48,7 +48,7 @@ export default function CheckOut() {
       } else {
         toast.error("Failed to start online payment.");
       }
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong.");
     } finally {
       setLoading(null);
@@ -66,7 +66,7 @@ export default function CheckOut() {
       } else {
         toast.error("Failed to place order.");
       }
-    } catch (err) {
+    } catch {
       toast.error("Something went wrong.");
     } finally {
       setLoading(null);

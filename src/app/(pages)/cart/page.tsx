@@ -35,7 +35,7 @@ export default function Cart() {
         console.log(response);
         setCartInfo(response);
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
@@ -58,7 +58,7 @@ export default function Cart() {
       } else {
         toast.error("Failed to remove item");
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setRemoveDisabled(false);
@@ -82,7 +82,7 @@ export default function Cart() {
           setNumberOfCartItems(numberOfCartItems - 1);
         }
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setUpdateDisabled(false);
@@ -102,7 +102,7 @@ export default function Cart() {
       } else {
         toast.error("Failed to clear cart");
       }
-    } catch (error) {
+    } catch {
       toast.error("Something went wrong");
     } finally {
       setRemoveAllItemsDisabled(false);

@@ -15,7 +15,7 @@ export default function Orders() {
       try {
         const response: Orders = await getUserOrder();
         setOrders(response);
-      } catch (error) {
+      } catch {
         toast.error("Failed to load orders. Please try again.");
       } finally {
         setLoading(false);
